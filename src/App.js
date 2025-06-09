@@ -10,7 +10,7 @@ import cloudyAnim from "./animations/cloudy.json";
 function App() {
   const [location, setLocation] = useState("");
   const [weather, setWeather] = useState(null);
-  const [bgAnim, setBgAnim] = useState(null); // No animation by default
+  const [bgAnim, setBgAnim] = useState(null); 
   const [error, setError] = useState("");
 
   const fetchWeather = async () => {
