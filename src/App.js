@@ -10,7 +10,7 @@ import cloudyAnim from "./animations/cloudy.json";
 function App() {
   const [location, setLocation] = useState("");
   const [weather, setWeather] = useState(null);
-  const [bgAnim, setBgAnim] = useState(null); 
+  const [bgAnim, setBgAnim] = useState(null);
   const [error, setError] = useState("");
 
   const fetchWeather = async () => {
@@ -53,13 +53,7 @@ function App() {
 
   return (
     <div className="App">
-      {bgAnim && (
-        <Lottie
-          animationData={bgAnim}
-          loop
-          className="bg-anim"
-        />
-      )}
+      {bgAnim && <Lottie animationData={bgAnim} loop className="bg-anim" />}
 
       <div className="content">
         <h1 className="main-heading">Weather Forecast</h1>
@@ -87,7 +81,9 @@ function App() {
               <div className="forecast-cards">
                 {weather.forecast.forecastday.slice(1).map((day, index) => (
                   <div className="card" key={index}>
-                    <p><strong>{new Date(day.date).toDateString()}</strong></p>
+                    <p>
+                      <strong>{new Date(day.date).toDateString()}</strong>
+                    </p>
                     <img
                       src={day.day.condition.icon}
                       alt={day.day.condition.text}
