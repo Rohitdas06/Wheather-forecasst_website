@@ -21,7 +21,7 @@ function App() {
 
     try {
       const response = await fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${location}&days=4`
+        `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${location}&days=6`
       );
       const data = await response.json();
 
