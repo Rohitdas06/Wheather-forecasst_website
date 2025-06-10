@@ -13,15 +13,10 @@ function App() {
   const [bgAnim, setBgAnim] = useState(null);
   const [error, setError] = useState("");
 
-  const fetchWeather = async () => {
-    if (!location.trim()) {
-      setError("Please enter a location.");
-      return;
-    }
-
+  const fetchWeather = async (loc) => {
     try {
       const response = await fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${location}&days=6`
+        `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${loc}&days=6`
       );
       const data = await response.json();
 
@@ -51,6 +46,31 @@ function App() {
     }
   };
 
+  const handleManualSearch = () => {
+    if (!location.trim()) {
+      setError("Please enter a location.");
+      return;
+    }
+    fetchWeather(location);
+  };
+
+  const handleUseMyLocation = () => {
+    if (!navigator.geolocation) {
+      setError("Geolocation is not supported by your browser.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const coords = `${position.coords.latitude},${position.coords.longitude}`;
+        fetchWeather(coords);
+      },
+      () => {
+        setError("Unable to retrieve your location.");
+      }
+    );
+  };
+
   return (
     <div className="App">
       {bgAnim && <Lottie animationData={bgAnim} loop className="bg-anim" />}
@@ -64,7 +84,12 @@ function App() {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
-        <button onClick={fetchWeather}>Get Forecast</button>
+        <div style={{ marginTop: "10px" }}>
+          <button onClick={handleManualSearch}>Get Forecast</button>
+          <button onClick={handleUseMyLocation} style={{ marginLeft: "10px", backgroundColor: "#28a745" }}>
+            Use My Location
+          </button>
+        </div>
 
         {error && <p className="error">{error}</p>}
 
@@ -77,7 +102,7 @@ function App() {
             <p>Temperature: {weather.current.temp_c}°C</p>
 
             <div className="forecast">
-              <h3>Next 3 Days Forecast</h3>
+              <h3>Next 5 Days Forecast</h3>
               <div className="forecast-cards">
                 {weather.forecast.forecastday.slice(1).map((day, index) => (
                   <div className="card" key={index}>
