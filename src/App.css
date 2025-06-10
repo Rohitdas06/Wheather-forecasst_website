@@ -36,6 +36,15 @@ button {
   cursor: pointer;
 }
 
+.button-group {
+  margin-top: 10px;
+}
+
+.location-button {
+  margin-left: 10px;
+  background-color: #28a745;
+}
+
 .weather-info {
   margin-top: 20px;
   background: rgba(0, 0, 0, 0.3);

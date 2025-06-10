@@ -51,7 +51,7 @@ function App() {
       setError("Please enter a location.");
       return;
     }
-    fetchWeather(location);
+    fetchWeather(`${location},IN`);
   };
 
   const handleUseMyLocation = () => {
@@ -84,9 +84,9 @@ function App() {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
-        <div style={{ marginTop: "10px" }}>
+        <div className="button-group">
           <button onClick={handleManualSearch}>Get Forecast</button>
-          <button onClick={handleUseMyLocation} style={{ marginLeft: "10px", backgroundColor: "#28a745" }}>
+          <button onClick={handleUseMyLocation} className="location-button">
             Use My Location
           </button>
         </div>
