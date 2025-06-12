@@ -83,5 +83,3 @@ Make sure your API key from [WeatherAPI](https://www.weatherapi.com/)  is valid 
 - [WeatherAPI Docs](https://www.weatherapi.com/docs/)
   
 - [Lottie Docs](https://airbnb.io/lottie/#/)
-
-
